@@ -731,10 +731,210 @@
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <!--- exam time table change !--->
-                <div id="timeTable-view" style="display: none;">
+                    <!-- OD/Leave Requests View -->
+                    <div id="od-requests-view" style="display: none;">
+                        <div class="card shadow-lg rounded-4 border-0">
+                            <!-- Header Section -->
+                            <div class="card-header bg-gradient-primary text-white d-flex justify-content-between align-items-center p-4 rounded-top-4">
+                                <div class="d-flex align-items-center">
+                                    <div class="header-icon-wrapper bg-white bg-opacity-25 rounded-circle p-2 me-3">
+                                        <i class="fas fa-calendar-check fa-lg text-white"></i>
+                                    </div>
+                                    <h5 class="mb-0">OD/Leave Requests</h5>
+                                </div>
+                                <button id="back-to-admin-cards" class="btn btn-light btn-sm px-3 rounded-pill">
+                                    <i class="fas fa-arrow-left me-2"></i>Back
+                                </button>
+                            </div>
+
+                            <div class="card-body p-4">
+                                <!-- Filters Section -->
+                                <div class="row mb-4 g-3">
+                                    <div class="col-12">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="d-flex gap-3 align-items-center">
+                                                <!-- Request Type Filter -->
+                                                <div class="d-flex align-items-center">
+                                                    <label class="form-label mb-0 me-2 text-muted">Request Type:</label>
+                                                    <div class="input-group input-group-sm" style="width: 150px;">
+                                                        <span class="input-group-text bg-light border-end-0">
+                                                            <i class="fas fa-tag text-primary"></i>
+                                                        </span>
+                                                        <select class="form-select border-start-0" id="requestTypeFilter">
+                                                            <option value="all">All Requests</option>
+                                                            <option value="OD">OD Requests</option>
+                                                            <option value="Leave">Leave Requests</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Status Filter -->
+                                                <div class="d-flex align-items-center">
+                                                    <label class="form-label mb-0 me-2 text-muted">Status:</label>
+                                                    <div class="input-group input-group-sm" style="width: 150px;">
+                                                        <span class="input-group-text bg-light border-end-0">
+                                                            <i class="fas fa-check-circle text-primary"></i>
+                                                        </span>
+                                                        <select class="form-select border-start-0" id="statusFilter">
+                                                            <option value="all">All Status</option>
+                                                            <option value="pending">Pending</option>
+                                                            <option value="approved">Approved</option>
+                                                            <option value="rejected">Rejected</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Requests Table -->
+                                <div class="table-responsive">
+                                    <table class="table table-hover align-middle">
+                                        <thead class="bg-light">
+                                            <tr>
+                                                <th class="py-3">Request ID</th>
+                                                <th class="py-3">Student Name</th>
+                                                <th class="py-3">Roll No</th>
+                                                <th class="py-3">Type</th>
+                                                <th class="py-3">From Date</th>
+                                                <th class="py-3">To Date</th>
+                                                <th class="py-3">Reason</th>
+                                                <th class="py-3">Status</th>
+                                                <th class="py-3">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="odRequestsTable" class="border-top-0">
+                                            <!-- Table content will be dynamically populated -->
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <!-- Empty State Message -->
+                                <div id="emptyState" class="text-center py-5" style="display: none;">
+                                    <div class="empty-state-icon mb-3">
+                                        <i class="fas fa-inbox fa-3x text-muted"></i>
+                                    </div>
+                                    <h6 class="text-muted">No requests found</h6>
+                                    <p class="small text-muted mb-0">There are no requests matching your filters</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Faculty Change View -->
+                    <div id="faculty-change-view" style="display: none;">
+                        <div class="card shadow-lg rounded-4 border-0">
+                            <div class="card-header bg-gradient-primary text-white d-flex justify-content-between align-items-center p-4">
+                                <div class="d-flex align-items-center">
+                                    <div class="header-icon-wrapper bg-white bg-opacity-25 rounded-circle p-2 me-3">
+                                        <i class="fas fa-exchange-alt fa-lg text-white"></i>
+                                    </div>
+                                    <h5 class="mb-0">Change Course-Faculty</h5>
+                                </div>
+                                <button id="back-to-academic-cards-btn" class="btn btn-light btn-sm px-3 rounded-pill px-3 rounded-pill">
+                                    <i class="fas fa-arrow-left me-2"></i>Back
+                                </button>
+                            </div>
+
+                            <div class="card-body p-4">
+                                <div class="card border-0 shadow-hover">
+                                    <div class="card-body p-4">
+                                        <!-- Current Faculty Section -->
+                                        <div class="mb-5">
+                                            <h6 class="section-title d-flex align-items-center mb-4">
+                                                <span class="icon-wrapper bg-primary bg-opacity-10 rounded-circle p-2 me-2">
+                                                    <i class="fas fa-user-graduate text-primary"></i>
+                                                </span>
+                                                Current Faculty Details
+                                            </h6>
+
+                                            <form id="facultyChangeForm" class="needs-validation" novalidate>
+                                                <div class="row g-4">
+                                                    <!-- Course Selection -->
+                                                    <div class="col-md-6">
+                                                        <label class="form-label">Select Course</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-text bg-light">
+                                                                <i class="fas fa-book text-primary"></i>
+                                                            </span>
+                                                            <select class="form-select" id="currentCourse" required>
+                                                                <option value="">Choose course...</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-text">Select the course you want to change faculty for</div>
+                                                    </div>
+
+                                                    <!-- Current Faculty Display -->
+                                                    <div class="col-md-6">
+                                                        <label class="form-label">Current Faculty</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-text bg-light">
+                                                                <i class="fas fa-user-tie text-primary"></i>
+                                                            </span>
+                                                            <select class="form-select" id="currentFaculty" required disabled>
+                                                                <option value="">Choose faculty...</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                        <!-- New Faculty Section -->
+                                        <div class="mt-4">
+                                            <h6 class="section-title d-flex align-items-center mb-4">
+                                                <span class="icon-wrapper bg-success bg-opacity-10 rounded-circle p-2 me-2">
+                                                    <i class="fas fa-user-plus text-success"></i>
+                                                </span>
+                                                New Faculty Assignment
+                                            </h6>
+
+                                            <div class="row g-4">
+                                                <!-- Department Selection -->
+                                                <div class="col-md-6">
+                                                    <label class="form-label">Select Department</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-text bg-light">
+                                                            <i class="fas fa-building text-success"></i>
+                                                        </span>
+                                                        <select class="form-select" id="newDepartment" required>
+                                                            <option value="">Choose department...</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <!-- New Faculty Selection -->
+                                                <div class="col-md-6">
+                                                    <label class="form-label">Select New Faculty</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-text bg-light">
+                                                            <i class="fas fa-user-tie text-success"></i>
+                                                        </span>
+                                                        <select class="form-select" id="newFaculty" required>
+                                                            <option value="">Choose faculty...</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Submit Button -->
+                                            <div class="d-flex justify-content-center mt-5">
+                                                <button type="button" id="saveFacultyChange" class="btn btn-primary btn-lg px-5">
+                                                    <i class="fas fa-save me-2"></i>
+                                                    Save Changes
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Time Table View -->
+                    <div id="timeTable-view" style="display: none;">
                         <div class="card shadow-lg rounded-4 border-0">
                             <div class="card-header bg-gradient-primary text-white d-flex justify-content-between align-items-center p-4">
                                 <div class="d-flex align-items-center">
@@ -748,300 +948,98 @@
                                 </button>
                             </div>
 
-                    <div class="card-body p-4">
-                        <div class="card border-0 shadow-hover mb-4">
-                            <div class="card-body p-4">
-                                <h6 class="text-primary mb-4"><i class="fas fa-info-circle me-2"></i>Time Table Information</h6>
-                                
-                                <form id="timeTableForm">
-                                    <!-- Exam Name Field -->
-                                    <div class="mb-4">
-                                    <select id="examName" class="form-select">
-                                            <option disabled selected>Select Exam Name</option>
-                                            <optgroup label="Theory">
-                                                <option value="CIA 1">CIA 1</option>
-                                                <option value="CIA 2">CIA 2</option>
-                                                <option value="Model Exam">Model Exam</option>
-                                                <option value="SSA 1">SSA 1</option>
-                                                <option value="SSA 2">SSA 2</option>
-                                                <option value="AL 1">AL 1</option>
-                                                <option value="AL 2">AL 2</option>
-                                            </optgroup>
-                                            <optgroup label="Practical">
-                                                <option value="CIA 1">CIA 1</option>
-                                                <option value="CIA 2">CIA 2</option>
-                                                <option value="Model Exam">Model Exam</option>
-                                                <option value="SSA 1">SSA 1</option>
-                                                <option value="SSA 2">SSA 2</option>
-                                                <option value="Laboratory 1">Laboratory 1</option>
-                                                <option value="Laboratory 2">Laboratory 2</option>
-                                                <option value="Model Lab">Model Lab</option>
-                                            </optgroup>
-                                            <optgroup label="Project">
-                                                <option value="CIA 1">CIA 1</option>
-                                                <option value="CIA 2">CIA 2</option>
-                                                <option value="Model Exam">Model Exam</option>
-                                                <option value="SSA 1">SSA 1</option>
-                                                <option value="SSA 2">SSA 2</option>
-                                                <option value="Review 1">Review 1</option>
-                                                <option value="Review 2">Review 2</option>
-                                                <option value="Review 3">Review 3</option>
-                                            </optgroup>
-                                            <optgroup label="Lab">
-                                                <option value="Cycle 1">Cycle 1</option>
-                                                <option value="Cycle 2">Cycle 2</option>
-                                            </optgroup>
-                                        </select>
+                        <div class="card-body p-4">
+                            <div class="card border-0 shadow-hover mb-4">
+                                <div class="card-body p-4">
+                                    <h6 class="text-primary mb-4"><i class="fas fa-info-circle me-2"></i>Time Table Information</h6>
+                                    
+                                    <form id="timeTableForm">
+                                        <!-- Exam Name Field -->
+                                        <div class="mb-4">
+                                        <select id="examName" class="form-select">
+                                                <option disabled selected>Select Exam Name</option>
+                                                <optgroup label="Theory">
+                                                    <option value="CIA 1">CIA 1</option>
+                                                    <option value="CIA 2">CIA 2</option>
+                                                    <option value="Model Exam">Model Exam</option>
+                                                    <option value="SSA 1">SSA 1</option>
+                                                    <option value="SSA 2">SSA 2</option>
+                                                    <option value="AL 1">AL 1</option>
+                                                    <option value="AL 2">AL 2</option>
+                                                </optgroup>
+                                                <optgroup label="Practical">
+                                                    <option value="CIA 1">CIA 1</option>
+                                                    <option value="CIA 2">CIA 2</option>
+                                                    <option value="Model Exam">Model Exam</option>
+                                                    <option value="SSA 1">SSA 1</option>
+                                                    <option value="SSA 2">SSA 2</option>
+                                                    <option value="Laboratory 1">Laboratory 1</option>
+                                                    <option value="Laboratory 2">Laboratory 2</option>
+                                                    <option value="Model Lab">Model Lab</option>
+                                                </optgroup>
+                                                <optgroup label="Project">
+                                                    <option value="CIA 1">CIA 1</option>
+                                                    <option value="CIA 2">CIA 2</option>
+                                                    <option value="Model Exam">Model Exam</option>
+                                                    <option value="SSA 1">SSA 1</option>
+                                                    <option value="SSA 2">SSA 2</option>
+                                                    <option value="Review 1">Review 1</option>
+                                                    <option value="Review 2">Review 2</option>
+                                                    <option value="Review 3">Review 3</option>
+                                                </optgroup>
+                                                <optgroup label="Lab">
+                                                    <option value="Cycle 1">Cycle 1</option>
+                                                    <option value="Cycle 2">Cycle 2</option>
+                                                </optgroup>
+                                            </select>
 
-                                    </div>
-                                    
-                                   
-                                    
-                                    <!-- Course Dates Section -->
-                                    <div class="mb-3">
-                                        <div class="d-flex justify-content-between align-items-center mb-3">
-                                            <h6 class="text-primary mb-0"><i class="fas fa-calendar-alt me-2"></i>Course Exams Schedule</h6>
-                                            <button type="button" id="addCourseBtn" class="btn btn-sm btn-timeTable">
-                                                <i class="fas fa-plus me-2"></i>Add Course
-                                            </button>
                                         </div>
                                         
-                                        <div id="coursesContainer">
-                                            <!-- Initial course item -->
+                                       
+                                        
+                                        <!-- Course Dates Section -->
+                                        <div class="mb-3">
+                                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                                <h6 class="text-primary mb-0"><i class="fas fa-calendar-alt me-2"></i>Course Exams Schedule</h6>
+                                                <button type="button" id="addCourseBtn" class="btn btn-sm btn-timeTable">
+                                                    <i class="fas fa-plus me-2"></i>Add Course
+                                                </button>
+                                            </div>
                                             
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- Submit Button -->
-                                    <div class="d-grid gap-2 mt-4">
-                                        <button type="submit" class="btn btn-lg btn-timeTable">
-                                            <i class="fas fa-save me-2"></i>Save Time Table
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <div id="timetableList" class="mt-5">
-                            <h5 class="mb-3">Saved Exam Time Tables</h5>
-                            <table class="table table-bordered">
-                                <thead class="table-light">
-                                <tr>
-                                    <th>Exam Name</th>
-                                    <th>Course Details</th>
-                                    <th>Created On</th>
-                                    
-                                </tr>
-                                </thead>
-                                <tbody id="timetableBody">
-                                <!-- Timetable rows will be dynamically added here -->
-                                </tbody>
-                            </table>
-                        </div>
-
-                    </div>
-                </div>        
-            </div>
-</div>
-
-
-                <!-- faculty change view -->
-                <div id="faculty-change-view" style="display: none;">
-                    <div class="card shadow-lg rounded-4 border-0">
-                        <div class="card-header bg-gradient-primary text-white d-flex justify-content-between align-items-center p-4">
-                            <div class="d-flex align-items-center">
-                                <div class="header-icon-wrapper bg-white bg-opacity-25 rounded-circle p-2 me-3">
-                                    <i class="fas fa-exchange-alt fa-lg text-white"></i>
-                                </div>
-                                <h5 class="mb-0">Change Course-Faculty</h5>
-                            </div>
-                            <button id="back-to-academic-cards-btn" class="btn btn-light btn-sm px-3 rounded-pill px-3 rounded-pill">
-                                <i class="fas fa-arrow-left me-2"></i>Back
-                            </button>
-                        </div>
-
-                        <div class="card-body p-4">
-                            <div class="card border-0 shadow-hover">
-                                <div class="card-body p-4">
-                                    <!-- Current Faculty Section -->
-                                    <div class="mb-5">
-                                        <h6 class="section-title d-flex align-items-center mb-4">
-                                            <span class="icon-wrapper bg-primary bg-opacity-10 rounded-circle p-2 me-2">
-                                                <i class="fas fa-user-graduate text-primary"></i>
-                                            </span>
-                                            Current Faculty Details
-                                        </h6>
-
-                                        <form id="facultyChangeForm" class="needs-validation" novalidate>
-                                            <div class="row g-4">
-                                                <!-- Course Selection -->
-                                                <div class="col-md-6">
-                                                    <label class="form-label">Select Course</label>
-                                                    <div class="input-group">
-                                                        <span class="input-group-text bg-light">
-                                                            <i class="fas fa-book text-primary"></i>
-                                                        </span>
-                                                        <select class="form-select" id="currentCourse" required>
-                                                            <option value="">Choose course...</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-text">Select the course you want to change faculty for</div>
-                                                </div>
-
-                                                <!-- Current Faculty Display -->
-                                                <div class="col-md-6">
-                                                    <label class="form-label">Current Faculty</label>
-                                                    <div class="input-group">
-                                                        <span class="input-group-text bg-light">
-                                                            <i class="fas fa-user-tie text-primary"></i>
-                                                        </span>
-                                                        <select class="form-select" id="currentFaculty" required disabled>
-                                                            <option value="">Choose faculty...</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-
-                                    <!-- New Faculty Section -->
-                                    <div class="mt-4">
-                                        <h6 class="section-title d-flex align-items-center mb-4">
-                                            <span class="icon-wrapper bg-success bg-opacity-10 rounded-circle p-2 me-2">
-                                                <i class="fas fa-user-plus text-success"></i>
-                                            </span>
-                                            New Faculty Assignment
-                                        </h6>
-
-                                        <div class="row g-4">
-                                            <!-- Department Selection -->
-                                            <div class="col-md-6">
-                                                <label class="form-label">Select Department</label>
-                                                <div class="input-group">
-                                                    <span class="input-group-text bg-light">
-                                                        <i class="fas fa-building text-success"></i>
-                                                    </span>
-                                                    <select class="form-select" id="newDepartment" required>
-                                                        <option value="">Choose department...</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                            <!-- New Faculty Selection -->
-                                            <div class="col-md-6">
-                                                <label class="form-label">Select New Faculty</label>
-                                                <div class="input-group">
-                                                    <span class="input-group-text bg-light">
-                                                        <i class="fas fa-user-tie text-success"></i>
-                                                    </span>
-                                                    <select class="form-select" id="newFaculty" required>
-                                                        <option value="">Choose faculty...</option>
-                                                    </select>
-                                                </div>
+                                            <div id="coursesContainer">
+                                                <!-- Initial course item -->
+                                                
                                             </div>
                                         </div>
-
+                                        
                                         <!-- Submit Button -->
-                                        <div class="d-flex justify-content-center mt-5">
-                                            <button type="button" id="saveFacultyChange" class="btn btn-primary btn-lg px-5">
-                                                <i class="fas fa-save me-2"></i>
-                                                Save Changes
+                                        <div class="d-grid gap-2 mt-4">
+                                            <button type="submit" class="btn btn-lg btn-timeTable">
+                                                <i class="fas fa-save me-2"></i>Save Time Table
                                             </button>
                                         </div>
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- OD/Leave Requests View -->
-                <div id="od-requests-view" style="display: none;">
-                    <div class="card shadow-lg rounded-4 border-0">
-                        <!-- Header Section -->
-                        <div class="card-header bg-gradient-primary text-white d-flex justify-content-between align-items-center p-4 rounded-top-4">
-                            <div class="d-flex align-items-center">
-                                <div class="header-icon-wrapper bg-white bg-opacity-25 rounded-circle p-2 me-3">
-                                    <i class="fas fa-calendar-check fa-lg text-white"></i>
-                                </div>
-                                <h5 class="mb-0">OD/Leave Requests</h5>
-                            </div>
-                            <button id="back-to-admin-cards" class="btn btn-light btn-sm px-3 rounded-pill">
-                                <i class="fas fa-arrow-left me-2"></i>Back
-                            </button>
-                        </div>
-
-                        <div class="card-body p-4">
-                            <!-- Filters Section -->
-                            <div class="row mb-4 g-3">
-                                <div class="col-12">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="d-flex gap-3 align-items-center">
-                                            <!-- Request Type Filter -->
-                                            <div class="d-flex align-items-center">
-                                                <label class="form-label mb-0 me-2 text-muted">Request Type:</label>
-                                                <div class="input-group input-group-sm" style="width: 150px;">
-                                                    <span class="input-group-text bg-light border-end-0">
-                                                        <i class="fas fa-tag text-primary"></i>
-                                                    </span>
-                                                    <select class="form-select border-start-0" id="requestTypeFilter">
-                                                        <option value="all">All Requests</option>
-                                                        <option value="OD">OD Requests</option>
-                                                        <option value="Leave">Leave Requests</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                            <!-- Status Filter -->
-                                            <div class="d-flex align-items-center">
-                                                <label class="form-label mb-0 me-2 text-muted">Status:</label>
-                                                <div class="input-group input-group-sm" style="width: 150px;">
-                                                    <span class="input-group-text bg-light border-end-0">
-                                                        <i class="fas fa-check-circle text-primary"></i>
-                                                    </span>
-                                                    <select class="form-select border-start-0" id="statusFilter">
-                                                        <option value="all">All Status</option>
-                                                        <option value="pending">Pending</option>
-                                                        <option value="approved">Approved</option>
-                                                        <option value="rejected">Rejected</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Requests Table -->
-                            <div class="table-responsive">
-                                <table class="table table-hover align-middle">
-                                    <thead class="bg-light">
-                                        <tr>
-                                            <th class="py-3">Request ID</th>
-                                            <th class="py-3">Student Name</th>
-                                            <th class="py-3">Roll No</th>
-                                            <th class="py-3">Type</th>
-                                            <th class="py-3">From Date</th>
-                                            <th class="py-3">To Date</th>
-                                            <th class="py-3">Reason</th>
-                                            <th class="py-3">Status</th>
-                                            <th class="py-3">Actions</th>
-                                        </tr>
+                            <div id="timetableList" class="mt-5">
+                                <h5 class="mb-3">Saved Exam Time Tables</h5>
+                                <table class="table table-bordered">
+                                    <thead class="table-light">
+                                    <tr>
+                                        <th>Exam Name</th>
+                                        <th>Course Details</th>
+                                        <th>Created On</th>
+                                        
+                                    </tr>
                                     </thead>
-                                    <tbody id="odRequestsTable" class="border-top-0">
-                                        <!-- Table content will be dynamically populated -->
+                                    <tbody id="timetableBody">
+                                    <!-- Timetable rows will be dynamically added here -->
                                     </tbody>
                                 </table>
                             </div>
 
-                            <!-- Empty State Message -->
-                            <div id="emptyState" class="text-center py-5" style="display: none;">
-                                <div class="empty-state-icon mb-3">
-                                    <i class="fas fa-inbox fa-3x text-muted"></i>
-                                </div>
-                                <h6 class="text-muted">No requests found</h6>
-                                <p class="small text-muted mb-0">There are no requests matching your filters</p>
-                            </div>
                         </div>
-                    </div>
+                    </div>        
                 </div>
 
                 <!-- Day Order Modification View -->
@@ -1134,8 +1132,7 @@
                     </div>
                 </div>
 
-
-                <!-- special attendance view -->
+                <!-- Move Special Attendance View here -->
                 <div id="special-attendance-view" style="display: none;">
                     <div class="card shadow-lg rounded-4 border-0">
                         <!-- Header Section -->
